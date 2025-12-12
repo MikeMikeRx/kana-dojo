@@ -8,7 +8,7 @@ import {
   vocabDataService,
   VocabLevel
 } from '@/features/Vocabulary/services/vocabDataService';
-import LevelSetCards from '@/shared/components/LevelSetCards';
+import LevelSetCards from '@/shared/components/Menu/LevelSetCards';
 
 import type { IWord } from '@/shared/types/interfaces';
 

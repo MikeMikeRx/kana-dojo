@@ -10,7 +10,7 @@ import {
   kanjiDataService,
   KanjiLevel
 } from '@/features/Kanji/services/kanjiDataService';
-import LevelSetCards from '@/shared/components/LevelSetCards';
+import LevelSetCards from '@/shared/components/Menu/LevelSetCards';
 
 const levelOrder: KanjiLevel[] = ['n5', 'n4', 'n3', 'n2', 'n1'];
 const KANJI_PER_SET = 10;
