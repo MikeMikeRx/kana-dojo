@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef } from 'react';
 import { X, Keyboard } from 'lucide-react';
 import { cn } from '@/shared/lib/utils';
+import { ActionButton } from '@/shared/components/ui/ActionButton';
 import {
   Select,
   SelectContent,
@@ -125,21 +126,20 @@ export default function TranslatorInput({
 
         {/* Clear button */}
         {value.length > 0 && (
-          <button
+          <ActionButton
             onClick={handleClear}
             disabled={isDisabled}
+            colorScheme='main'
+            borderRadius='lg'
+            borderBottomThickness={2}
             className={cn(
-              'h-9 w-9 rounded-lg cursor-pointer',
-              'flex items-center justify-center',
-              'bg-[var(--background-color)] border border-[var(--border-color)]',
-              'text-[var(--secondary-color)] hover:text-[var(--main-color)]',
-              'hover:border-[var(--main-color)] transition-all duration-200',
+              '!w-9 !min-w-9 h-9 !p-0',
               'disabled:opacity-50 disabled:cursor-not-allowed'
             )}
             aria-label='Clear input'
           >
             <X className='h-4 w-4' />
-          </button>
+          </ActionButton>
         )}
       </div>
 
