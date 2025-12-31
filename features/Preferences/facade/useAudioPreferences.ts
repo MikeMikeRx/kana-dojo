@@ -1,6 +1,6 @@
 'use client';
 
-import { useShallow } from 'zustand/react/shallow';
+import { useMemo } from 'react';
 import usePreferencesStore from '../store/usePreferencesStore';
 
 export interface AudioPreferences {
@@ -22,18 +22,41 @@ export interface AudioPreferences {
  * Provides access to audio-related preferences
  */
 export function useAudioPreferences(): AudioPreferences {
-  return usePreferencesStore(
-    useShallow(state => ({
-      silentMode: state.silentMode,
-      setSilentMode: state.setSilentMode,
-      pronunciationEnabled: state.pronunciationEnabled,
-      setPronunciationEnabled: state.setPronunciationEnabled,
-      pronunciationSpeed: state.pronunciationSpeed,
-      setPronunciationSpeed: state.setPronunciationSpeed,
-      pronunciationPitch: state.pronunciationPitch,
-      setPronunciationPitch: state.setPronunciationPitch,
-      pronunciationVoiceName: state.pronunciationVoiceName,
-      setPronunciationVoiceName: state.setPronunciationVoiceName
-    }))
-  ) as AudioPreferences;
+  const silentMode = usePreferencesStore(state => state.silentMode);
+  const setSilentMode = usePreferencesStore(state => state.setSilentMode);
+  const pronunciationEnabled = usePreferencesStore(state => state.pronunciationEnabled);
+  const setPronunciationEnabled = usePreferencesStore(state => state.setPronunciationEnabled);
+  const pronunciationSpeed = usePreferencesStore(state => state.pronunciationSpeed);
+  const setPronunciationSpeed = usePreferencesStore(state => state.setPronunciationSpeed);
+  const pronunciationPitch = usePreferencesStore(state => state.pronunciationPitch);
+  const setPronunciationPitch = usePreferencesStore(state => state.setPronunciationPitch);
+  const pronunciationVoiceName = usePreferencesStore(state => state.pronunciationVoiceName);
+  const setPronunciationVoiceName = usePreferencesStore(state => state.setPronunciationVoiceName);
+
+  return useMemo<AudioPreferences>(
+    () => ({
+      silentMode,
+      setSilentMode,
+      pronunciationEnabled,
+      setPronunciationEnabled,
+      pronunciationSpeed,
+      setPronunciationSpeed,
+      pronunciationPitch,
+      setPronunciationPitch,
+      pronunciationVoiceName,
+      setPronunciationVoiceName
+    }),
+    [
+      silentMode,
+      setSilentMode,
+      pronunciationEnabled,
+      setPronunciationEnabled,
+      pronunciationSpeed,
+      setPronunciationSpeed,
+      pronunciationPitch,
+      setPronunciationPitch,
+      pronunciationVoiceName,
+      setPronunciationVoiceName
+    ]
+  );
 }

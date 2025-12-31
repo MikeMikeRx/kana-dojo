@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import { Link } from '@/core/i18n/routing';
 import { useClick } from '@/shared/hooks/useAudio';
 import { useStopwatch } from 'react-timer-hook';
-import { useStatsDisplay } from '@/features/Progress/facade';
+import { useStatsDisplay } from '@/features/Progress';
 import {
   X,
   SquareCheck,

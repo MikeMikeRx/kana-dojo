@@ -1,7 +1,7 @@
 'use client';
 import { useCallback } from 'react';
 import { Random } from 'random-js';
-import { useAudioPreferences } from '@/features/Preferences/facade';
+import { useAudioPreferences } from '@/features/Preferences';
 
 const random = new Random();
 

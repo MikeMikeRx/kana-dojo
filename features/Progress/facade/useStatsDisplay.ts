@@ -1,6 +1,6 @@
 'use client';
 
-import { useShallow } from 'zustand/react/shallow';
+import { useMemo } from 'react';
 import useStatsStore from '../store/useStatsStore';
 
 export interface StatsDisplay {
@@ -35,34 +35,79 @@ export interface StatsDisplay {
  * not modify them.
  */
 export function useStatsDisplay(): StatsDisplay {
-  return useStatsStore(
-    useShallow(state => ({
-      correctAnswers: state.numCorrectAnswers,
-      wrongAnswers: state.numWrongAnswers,
-      currentStreak: state.currentStreak,
-      bestStreak: state.allTimeStats.bestStreak,
-      stars: state.stars,
-      characterHistory: state.characterHistory,
-      characterScores: state.characterScores,
-      showStats: state.showStats,
-      toggleStats: state.toggleStats,
-      iconIndices: state.iconIndices,
-      score: state.score,
-      setScore: state.setScore,
-      setStars: state.setStars,
-      addIconIndex: state.addIconIndex,
-      setNewTotalMilliseconds: state.setNewTotalMilliseconds,
-      saveSession: state.saveSession,
-      totalMilliseconds: state.totalMilliseconds,
-      correctAnswerTimes: state.correctAnswerTimes,
+  const correctAnswers = useStatsStore(state => state.numCorrectAnswers);
+  const wrongAnswers = useStatsStore(state => state.numWrongAnswers);
+  const currentStreak = useStatsStore(state => state.currentStreak);
+  const bestStreak = useStatsStore(state => state.allTimeStats.bestStreak);
+  const stars = useStatsStore(state => state.stars);
+  const characterHistory = useStatsStore(state => state.characterHistory);
+  const characterScores = useStatsStore(state => state.characterScores);
+  const showStats = useStatsStore(state => state.showStats);
+  const toggleStats = useStatsStore(state => state.toggleStats);
+  const iconIndices = useStatsStore(state => state.iconIndices);
+  const score = useStatsStore(state => state.score);
+  const setScore = useStatsStore(state => state.setScore);
+  const setStars = useStatsStore(state => state.setStars);
+  const addIconIndex = useStatsStore(state => state.addIconIndex);
+  const setNewTotalMilliseconds = useStatsStore(state => state.setNewTotalMilliseconds);
+  const saveSession = useStatsStore(state => state.saveSession);
+  const totalMilliseconds = useStatsStore(state => state.totalMilliseconds);
+  const correctAnswerTimes = useStatsStore(state => state.correctAnswerTimes);
+  const totalSessions = useStatsStore(state => state.allTimeStats.totalSessions);
+  const totalCorrect = useStatsStore(state => state.allTimeStats.totalCorrect);
+  const totalIncorrect = useStatsStore(state => state.allTimeStats.totalIncorrect);
+  const characterMastery = useStatsStore(state => state.allTimeStats.characterMastery);
 
-      // All-time stats
-      totalSessions: state.allTimeStats.totalSessions,
-      totalCorrect: state.allTimeStats.totalCorrect,
-      totalIncorrect: state.allTimeStats.totalIncorrect,
-      characterMastery: state.allTimeStats.characterMastery
-    }))
-  ) as StatsDisplay;
+  return useMemo<StatsDisplay>(
+    () => ({
+      correctAnswers,
+      wrongAnswers,
+      currentStreak,
+      bestStreak,
+      stars,
+      characterHistory,
+      characterScores,
+      showStats,
+      toggleStats,
+      iconIndices,
+      score,
+      setScore,
+      setStars,
+      addIconIndex,
+      setNewTotalMilliseconds,
+      saveSession,
+      totalMilliseconds,
+      correctAnswerTimes,
+      totalSessions,
+      totalCorrect,
+      totalIncorrect,
+      characterMastery
+    }),
+    [
+      correctAnswers,
+      wrongAnswers,
+      currentStreak,
+      bestStreak,
+      stars,
+      characterHistory,
+      characterScores,
+      showStats,
+      toggleStats,
+      iconIndices,
+      score,
+      setScore,
+      setStars,
+      addIconIndex,
+      setNewTotalMilliseconds,
+      saveSession,
+      totalMilliseconds,
+      correctAnswerTimes,
+      totalSessions,
+      totalCorrect,
+      totalIncorrect,
+      characterMastery
+    ]
+  );
 }
 
 export interface SessionStats {
@@ -75,13 +120,18 @@ export interface SessionStats {
  * Read-only session stats for in-game UI
  */
 export function useSessionStats(): SessionStats {
-  return useStatsStore(
-    useShallow(state => ({
-      sessionCorrect: state.numCorrectAnswers,
-      sessionWrong: state.numWrongAnswers,
-      sessionStreak: state.currentStreak
-    }))
-  ) as SessionStats;
+  const sessionCorrect = useStatsStore(state => state.numCorrectAnswers);
+  const sessionWrong = useStatsStore(state => state.numWrongAnswers);
+  const sessionStreak = useStatsStore(state => state.currentStreak);
+
+  return useMemo<SessionStats>(
+    () => ({
+      sessionCorrect,
+      sessionWrong,
+      sessionStreak
+    }),
+    [sessionCorrect, sessionWrong, sessionStreak]
+  );
 }
 
 export interface TimedStats {
@@ -96,34 +146,55 @@ export interface TimedStats {
  * Read-only timed mode stats (Blitz/Gauntlet)
  */
 export function useTimedStats(contentType: 'kana' | 'kanji' | 'vocabulary'): TimedStats {
-  return useStatsStore(
-    useShallow(state => {
-      switch (contentType) {
-        case 'kana':
-          return {
-            correct: state.timedCorrectAnswers,
-            wrong: state.timedWrongAnswers,
-            streak: state.timedStreak,
-            bestStreak: state.timedBestStreak,
-            reset: state.resetTimedStats
-          };
-        case 'kanji':
-          return {
-            correct: state.timedKanjiCorrectAnswers,
-            wrong: state.timedKanjiWrongAnswers,
-            streak: state.timedKanjiStreak,
-            bestStreak: state.timedKanjiBestStreak,
-            reset: state.resetTimedKanjiStats
-          };
-        case 'vocabulary':
-          return {
-            correct: state.timedVocabCorrectAnswers,
-            wrong: state.timedVocabWrongAnswers,
-            streak: state.timedVocabStreak,
-            bestStreak: state.timedVocabBestStreak,
-            reset: state.resetTimedVocabStats
-          };
-      }
-    })
-  ) as TimedStats;
+  // Select based on content type
+  const correct = useStatsStore(state => {
+    switch (contentType) {
+      case 'kana': return state.timedCorrectAnswers;
+      case 'kanji': return state.timedKanjiCorrectAnswers;
+      case 'vocabulary': return state.timedVocabCorrectAnswers;
+    }
+  });
+
+  const wrong = useStatsStore(state => {
+    switch (contentType) {
+      case 'kana': return state.timedWrongAnswers;
+      case 'kanji': return state.timedKanjiWrongAnswers;
+      case 'vocabulary': return state.timedVocabWrongAnswers;
+    }
+  });
+
+  const streak = useStatsStore(state => {
+    switch (contentType) {
+      case 'kana': return state.timedStreak;
+      case 'kanji': return state.timedKanjiStreak;
+      case 'vocabulary': return state.timedVocabStreak;
+    }
+  });
+
+  const bestStreak = useStatsStore(state => {
+    switch (contentType) {
+      case 'kana': return state.timedBestStreak;
+      case 'kanji': return state.timedKanjiBestStreak;
+      case 'vocabulary': return state.timedVocabBestStreak;
+    }
+  });
+
+  const reset = useStatsStore(state => {
+    switch (contentType) {
+      case 'kana': return state.resetTimedStats;
+      case 'kanji': return state.resetTimedKanjiStats;
+      case 'vocabulary': return state.resetTimedVocabStats;
+    }
+  });
+
+  return useMemo<TimedStats>(
+    () => ({
+      correct,
+      wrong,
+      streak,
+      bestStreak,
+      reset
+    }),
+    [correct, wrong, streak, bestStreak, reset]
+  );
 }

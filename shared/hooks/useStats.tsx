@@ -1,7 +1,7 @@
 'use client';
 import { useCallback } from 'react';
 import { statsApi, achievementApi } from '@/shared/events';
-import { useStatsDisplay } from '@/features/Progress/facade';
+import { useStatsDisplay } from '@/features/Progress';
 
 /**
  * Stats Hook - Compatibility layer for existing code

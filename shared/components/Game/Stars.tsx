@@ -1,6 +1,6 @@
 'use client';
 import { memo, useMemo } from 'react';
-import { useStatsDisplay } from '@/features/Progress/facade';
+import { useStatsDisplay } from '@/features/Progress';
 import { Star } from 'lucide-react';
 import clsx from 'clsx';
 

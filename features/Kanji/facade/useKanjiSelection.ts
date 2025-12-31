@@ -1,6 +1,6 @@
 'use client';
 
-import { useShallow } from 'zustand/react/shallow';
+import { useMemo } from 'react';
 import useKanjiStore from '../store/useKanjiStore';
 import type { IKanjiObj } from '../store/useKanjiStore';
 
@@ -30,24 +30,49 @@ export interface KanjiSelectionActions {
 }
 
 export function useKanjiSelection(): KanjiSelection & KanjiSelectionActions {
-  return useKanjiStore(
-    useShallow(state => ({
+  const selectedKanji = useKanjiStore(state => state.selectedKanjiObjs);
+  const selectedSets = useKanjiStore(state => state.selectedKanjiSets);
+  const selectedCollection = useKanjiStore(state => state.selectedKanjiCollection);
+  const gameMode = useKanjiStore(state => state.selectedGameModeKanji);
+  const addKanji = useKanjiStore(state => state.addKanjiObj);
+  const addKanjiList = useKanjiStore(state => state.addKanjiObjs);
+  const clearKanji = useKanjiStore(state => state.clearKanjiObjs);
+  const setCollection = useKanjiStore(state => state.setSelectedKanjiCollection);
+  const setSets = useKanjiStore(state => state.setSelectedKanjiSets);
+  const clearSets = useKanjiStore(state => state.clearKanjiSets);
+  const setGameMode = useKanjiStore(state => state.setSelectedGameModeKanji);
+
+  return useMemo(
+    () => ({
       // State
-      selectedKanji: state.selectedKanjiObjs,
-      selectedSets: state.selectedKanjiSets,
-      selectedCollection: state.selectedKanjiCollection,
-      totalSelected: state.selectedKanjiObjs.length,
-      isEmpty: state.selectedKanjiObjs.length === 0,
-      gameMode: state.selectedGameModeKanji,
+      selectedKanji,
+      selectedSets,
+      selectedCollection,
+      totalSelected: selectedKanji.length,
+      isEmpty: selectedKanji.length === 0,
+      gameMode,
 
       // Actions
-      addKanji: state.addKanjiObj,
-      addKanjiList: state.addKanjiObjs,
-      clearKanji: state.clearKanjiObjs,
-      setCollection: state.setSelectedKanjiCollection,
-      setSets: state.setSelectedKanjiSets,
-      clearSets: state.clearKanjiSets,
-      setGameMode: state.setSelectedGameModeKanji
-    }))
+      addKanji,
+      addKanjiList,
+      clearKanji,
+      setCollection,
+      setSets,
+      clearSets,
+      setGameMode
+    }),
+    [
+      selectedKanji,
+      selectedSets,
+      selectedCollection,
+      gameMode,
+      addKanji,
+      addKanjiList,
+      clearKanji,
+      setCollection,
+      setSets,
+      clearSets,
+      setGameMode
+    ]
   );
 }

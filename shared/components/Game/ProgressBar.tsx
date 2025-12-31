@@ -1,6 +1,6 @@
 'use client';
 import { useEffect } from 'react';
-import { useStatsDisplay } from '@/features/Progress/facade';
+import { useStatsDisplay } from '@/features/Progress';
 // import useIndefiniteConfetti from '@/lib/hooks/useInfiniteConfetti';
 import { Random } from 'random-js';
 import { animalIconsLength } from '@/shared/lib/icons';

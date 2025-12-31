@@ -18,7 +18,7 @@ import {
 import clsx from 'clsx';
 import { useClick } from '@/shared/hooks/useAudio';
 import { ReactNode, useEffect, useRef } from 'react';
-import { useInputPreferences } from '@/features/Preferences/facade';
+import { useInputPreferences } from '@/features/Preferences';
 import { removeLocaleFromPath } from '@/shared/lib/pathUtils';
 
 // ============================================================================

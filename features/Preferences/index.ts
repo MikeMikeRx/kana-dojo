@@ -10,6 +10,7 @@ export {
 } from './facade';
 export type {
   AudioPreferences,
+  ThemePreferences,
   InputPreferences
 } from './facade';
 

@@ -1,6 +1,6 @@
 'use client';
 
-import { useShallow } from 'zustand/react/shallow';
+import { useMemo } from 'react';
 import usePreferencesStore from '../store/usePreferencesStore';
 
 export interface InputPreferences {
@@ -14,10 +14,14 @@ export interface InputPreferences {
  * Provides access to input-related preferences (hotkeys, etc.)
  */
 export function useInputPreferences(): InputPreferences {
-  return usePreferencesStore(
-    useShallow(state => ({
-      hotkeysOn: state.hotkeysOn,
-      setHotkeys: state.setHotkeys
-    }))
-  ) as InputPreferences;
+  const hotkeysOn = usePreferencesStore(state => state.hotkeysOn);
+  const setHotkeys = usePreferencesStore(state => state.setHotkeys);
+
+  return useMemo<InputPreferences>(
+    () => ({
+      hotkeysOn,
+      setHotkeys
+    }),
+    [hotkeysOn, setHotkeys]
+  );
 }

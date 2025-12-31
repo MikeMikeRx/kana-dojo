@@ -1,6 +1,6 @@
 'use client';
 
-import { useShallow } from 'zustand/react/shallow';
+import { useMemo } from 'react';
 import useKanaStore from '../store/useKanaStore';
 
 /**
@@ -26,28 +26,35 @@ export interface KanaSelectionActions {
 }
 
 export function useKanaSelection(): KanaSelection & KanaSelectionActions {
-  return useKanaStore(
-    useShallow(state => ({
+  const selectedGroupIndices = useKanaStore(state => state.kanaGroupIndices);
+  const gameMode = useKanaStore(state => state.selectedGameModeKana);
+  const addGroup = useKanaStore(state => state.addKanaGroupIndex);
+  const addGroups = useKanaStore(state => state.addKanaGroupIndices);
+  const setGameMode = useKanaStore(state => state.setSelectedGameModeKana);
+
+  return useMemo(
+    () => ({
       // State
-      selectedGroupIndices: state.kanaGroupIndices,
-      totalSelected: state.kanaGroupIndices.length,
-      isEmpty: state.kanaGroupIndices.length === 0,
-      gameMode: state.selectedGameModeKana,
+      selectedGroupIndices,
+      totalSelected: selectedGroupIndices.length,
+      isEmpty: selectedGroupIndices.length === 0,
+      gameMode,
 
       // Actions
-      addGroup: state.addKanaGroupIndex,
-      addGroups: state.addKanaGroupIndices,
+      addGroup,
+      addGroups,
       clearSelection: () => {
         // Toggle all currently selected groups to clear them
-        state.addKanaGroupIndices(state.kanaGroupIndices);
+        addGroups(selectedGroupIndices);
       },
       selectAll: () => {
         // Select all 69 kana groups (based on kana.ts data)
         const allIndices = Array.from({ length: 69 }, (_, i) => i);
-        state.addKanaGroupIndices(allIndices);
+        addGroups(allIndices);
       },
-      isGroupSelected: (index: number) => state.kanaGroupIndices.includes(index),
-      setGameMode: state.setSelectedGameModeKana
-    }))
+      isGroupSelected: (index: number) => selectedGroupIndices.includes(index),
+      setGameMode
+    }),
+    [selectedGroupIndices, gameMode, addGroup, addGroups, setGameMode]
   );
 }

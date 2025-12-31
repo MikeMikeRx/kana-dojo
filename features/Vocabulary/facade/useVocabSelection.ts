@@ -1,6 +1,6 @@
 'use client';
 
-import { useShallow } from 'zustand/react/shallow';
+import { useMemo } from 'react';
 import useVocabStore from '../store/useVocabStore';
 import type { IVocabObj } from '../store/useVocabStore';
 
@@ -30,24 +30,49 @@ export interface VocabSelectionActions {
 }
 
 export function useVocabSelection(): VocabSelection & VocabSelectionActions {
-  return useVocabStore(
-    useShallow(state => ({
+  const selectedVocab = useVocabStore(state => state.selectedVocabObjs);
+  const selectedSets = useVocabStore(state => state.selectedVocabSets);
+  const selectedCollection = useVocabStore(state => state.selectedVocabCollection);
+  const gameMode = useVocabStore(state => state.selectedGameModeVocab);
+  const addVocab = useVocabStore(state => state.addVocabObj);
+  const addVocabList = useVocabStore(state => state.addVocabObjs);
+  const clearVocab = useVocabStore(state => state.clearVocabObjs);
+  const setCollection = useVocabStore(state => state.setSelectedVocabCollection);
+  const setSets = useVocabStore(state => state.setSelectedVocabSets);
+  const clearSets = useVocabStore(state => state.clearVocabSets);
+  const setGameMode = useVocabStore(state => state.setSelectedGameModeVocab);
+
+  return useMemo(
+    () => ({
       // State
-      selectedVocab: state.selectedVocabObjs,
-      selectedSets: state.selectedVocabSets,
-      selectedCollection: state.selectedVocabCollection,
-      totalSelected: state.selectedVocabObjs.length,
-      isEmpty: state.selectedVocabObjs.length === 0,
-      gameMode: state.selectedGameModeVocab,
+      selectedVocab,
+      selectedSets,
+      selectedCollection,
+      totalSelected: selectedVocab.length,
+      isEmpty: selectedVocab.length === 0,
+      gameMode,
 
       // Actions
-      addVocab: state.addVocabObj,
-      addVocabList: state.addVocabObjs,
-      clearVocab: state.clearVocabObjs,
-      setCollection: state.setSelectedVocabCollection,
-      setSets: state.setSelectedVocabSets,
-      clearSets: state.clearVocabSets,
-      setGameMode: state.setSelectedGameModeVocab
-    }))
+      addVocab,
+      addVocabList,
+      clearVocab,
+      setCollection,
+      setSets,
+      clearSets,
+      setGameMode
+    }),
+    [
+      selectedVocab,
+      selectedSets,
+      selectedCollection,
+      gameMode,
+      addVocab,
+      addVocabList,
+      clearVocab,
+      setCollection,
+      setSets,
+      clearSets,
+      setGameMode
+    ]
   );
 }
