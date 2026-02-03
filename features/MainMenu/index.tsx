@@ -30,7 +30,7 @@ const MainMenu = () => {
   const [isMounted, setIsMounted] = useState(false);
   const isLG = useMediaQuery({ minWidth: 1024 });
 
-  const { theme, setTheme } = useThemePreferences();
+  const { theme, setTheme, isGlassMode } = useThemePreferences();
 
   const { playClick } = useClick();
 
@@ -97,14 +97,15 @@ const MainMenu = () => {
         'flex min-h-[100dvh] max-w-[100dvw] flex-row justify-center',
       )}
     >
-      {isMounted && isLG && (
+      {isMounted && isLG && !isGlassMode && (
         <Suspense fallback={<></>}>
           <Decorations expandDecorations={expandDecorations} forceShow={true} />
           <Button
             variant='secondary'
             size='icon'
             className={clsx(
-              'fixed top-4 right-8 z-50 opacity-90',
+              'fixed top-4 right-8 z-50',
+              !isGlassMode && 'opacity-90',
               buttonBorderStyles,
               'transition-transform duration-250 active:scale-95',
             )}
@@ -138,7 +139,8 @@ const MainMenu = () => {
       <div
         className={clsx(
           '3xl:w-2/5 flex w-full flex-col items-center gap-4 px-4 pb-16 max-md:pt-4 sm:w-3/4 md:justify-center lg:w-1/2',
-          'z-50 opacity-90',
+          'z-50',
+          !isGlassMode && 'opacity-90',
           expandDecorations && 'hidden',
         )}
       >
@@ -234,7 +236,7 @@ const MainMenu = () => {
             'flex flex-col md:flex-row',
             'w-full',
             'max-md:border-b-4 max-md:border-(--border-color)',
-            'backdrop-blur-xl',
+            // 'backdrop-blur-xl',
           )}
         >
           {links.map((link, i) => (

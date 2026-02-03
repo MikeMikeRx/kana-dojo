@@ -1,5 +1,6 @@
 /* prettier-ignore-file */
 import { useCustomThemeStore } from '../store/useCustomThemeStore';
+import usePreferencesStore from '../store/usePreferencesStore';
 import {
   Atom,
   Sun,
@@ -132,8 +133,8 @@ export function getModifiedCardColor(
   themeId: string,
   cardColor: string,
 ): string {
-  if (themeId === 'neon-city-glass') {
-    return 'oklch(20% 0.01 255 / 0.65)'; // Dark semi-transparent
+  if (isPremiumThemeId(themeId)) {
+    return 'oklch(20% 0.01 255 / 0.85)'; // Dark semi-transparent
   }
   return cardColor;
 }
@@ -145,11 +146,20 @@ export function getModifiedBorderColor(
   themeId: string,
   borderColor: string,
 ): string {
-  if (themeId === 'neon-city-glass') {
-    return 'oklch(100% 0 0 / 0.12)'; // Light semi-transparent
+  if (isPremiumThemeId(themeId)) {
+    // return 'oklch(100% 0 0 / 0.12)'; // Light semi-transparent
+    return 'oklch(30% 0.01 255 / 0.85)'; // Dark semi-transparent
   }
   return borderColor;
 }
+
+export const getNeonCityWallpaperStyles = (isHighlighted: boolean) => ({
+  backgroundImage: "url('/wallpapers/neonretrocarcity.jpg')",
+  backgroundSize: 'cover',
+  backgroundPosition: 'center',
+  backgroundRepeat: 'no-repeat',
+  filter: isHighlighted ? 'brightness(1)' : 'brightness(0.85)',
+});
 
 /**
  * Generates a border color from a background color.
@@ -262,6 +272,19 @@ function buildThemeGroup(baseGroup: BaseThemeGroup): ThemeGroup {
 
 // Base theme definitions - only id, backgroundColor, mainColor, secondaryColor
 const baseThemeSets: BaseThemeGroup[] = [
+  {
+    name: 'Premium',
+    icon: Sparkles,
+    isLight: false,
+    themes: [
+      {
+        id: 'neon-city',
+        backgroundColor: 'oklch(0% 0 0 / 0.95)', // Fully transparent, as wallpaper will be behind
+        mainColor: 'oklch(100% 0 0)', // High contrast white
+        secondaryColor: 'oklch(90% 0 0)', // Muted light gray
+      },
+    ],
+  },
   {
     name: 'Base',
     icon: Atom,
@@ -1368,19 +1391,6 @@ const baseThemeSets: BaseThemeGroup[] = [
     ],
   },
   {
-    name: 'Special',
-    icon: Sparkles,
-    isLight: false,
-    themes: [
-      {
-        id: 'neon-city-glass',
-        backgroundColor: 'oklch(0% 0 0 / 0)', // Fully transparent, as wallpaper will be behind
-        mainColor: 'oklch(100% 0 0)', // High contrast white
-        secondaryColor: 'oklch(85% 0 0)', // Muted light gray
-      },
-    ],
-  },
-  {
     name: 'Extra',
     icon: Sparkles,
     isLight: false,
@@ -1398,6 +1408,22 @@ const baseThemeSets: BaseThemeGroup[] = [
     ],
   },
 ];
+
+const premiumThemeIds = new Set(
+  baseThemeSets
+    .find(group => group.name === 'Premium')
+    ?.themes.map(theme => theme.id) ?? [],
+);
+
+const legacyThemeAliases = new Map<string, string>([
+  ['neon-city-glass', 'neon-city'],
+]);
+
+const resolveThemeId = (themeId: string): string =>
+  legacyThemeAliases.get(themeId) ?? themeId;
+
+export const isPremiumThemeId = (themeId: string): boolean =>
+  premiumThemeIds.has(resolveThemeId(themeId));
 
 // Build the complete theme sets with generated card and border colors
 const themeSets: ThemeGroup[] = baseThemeSets.map(buildThemeGroup);
@@ -1463,12 +1489,17 @@ function ensureCustomThemesLoaded(): void {
 
 export function applyTheme(themeId: string) {
   ensureCustomThemesLoaded();
-  const theme = getThemeMap().get(themeId);
+  const resolvedThemeId = resolveThemeId(themeId);
+  const theme = getThemeMap().get(resolvedThemeId);
 
   if (!theme) {
     console.error(`Theme "${themeId}" not found`);
     return;
   }
+
+  usePreferencesStore
+    .getState()
+    .setGlassMode(isPremiumThemeId(resolvedThemeId));
 
   const root = document.documentElement;
 
@@ -1491,7 +1522,7 @@ export function applyTheme(themeId: string) {
     );
   }
 
-  root.setAttribute('data-theme', theme.id);
+  root.setAttribute('data-theme', resolvedThemeId);
 }
 
 // Apply a theme object directly (live preview theme)
@@ -1519,7 +1550,7 @@ export function applyThemeObject(theme: Theme) {
 // Helper to get a specific theme
 export function getTheme(themeId: string): Theme | undefined {
   ensureCustomThemesLoaded();
-  return getThemeMap().get(themeId);
+  return getThemeMap().get(resolveThemeId(themeId));
 }
 
 /**

@@ -2,6 +2,7 @@
 import { createElement, useEffect, useRef } from 'react';
 import themeSets, {
   applyTheme,
+  getNeonCityWallpaperStyles,
   // hexToHsl
 } from '@/features/Preferences/data/themes';
 import usePreferencesStore from '@/features/Preferences/store/usePreferencesStore';
@@ -159,26 +160,42 @@ const Themes = () => {
             {themeSet.themes.map(currentTheme => (
               <label
                 key={currentTheme.id}
+                className={clsx(
+                  currentTheme.id === 'long' && 'col-span-full',
+                  'flex items-center justify-center rounded-xl py-4 duration-275 hover:cursor-pointer',
+                  'flex-1 overflow-hidden',
+                  currentTheme.id === selectedTheme &&
+                    'border-0 border-(--main-color)',
+                )}
                 style={{
                   color: currentTheme.mainColor,
-                  background:
-                    currentTheme.id === '?'
-                      ? `linear-gradient(
-                          142deg,
-                          oklch(66.0% 0.18 25.0 / 1) 0%,
-                          oklch(72.0% 0.22 80.0 / 1) 12%,
-                          oklch(68.0% 0.20 145.0 / 1) 24%,
-                          oklch(70.0% 0.19 200.0 / 1) 36%,
-                          oklch(67.0% 0.18 235.0 / 1) 48%,
-                          oklch(73.0% 0.22 290.0 / 1) 60%,
-                          oklch(69.0% 0.21 330.0 / 1) 74%,
-                          oklch(74.0% 0.20 355.0 / 1) 88%,
-                          oklch(66.0% 0.18 25.0 / 1) 100%
-                        )`
-                      : isHovered === currentTheme.id
-                        ? currentTheme.cardColor
-                        : currentTheme.backgroundColor,
-                  borderColor: currentTheme.borderColor,
+                  ...(currentTheme.id === 'neon-city'
+                    ? {
+                        ...getNeonCityWallpaperStyles(
+                          isHovered === currentTheme.id,
+                        ),
+                        borderColor: currentTheme.borderColor,
+                      }
+                    : {
+                        background:
+                          currentTheme.id === '?'
+                            ? `linear-gradient(
+                                142deg,
+                                oklch(66.0% 0.18 25.0 / 1) 0%,
+                                oklch(72.0% 0.22 80.0 / 1) 12%,
+                                oklch(68.0% 0.20 145.0 / 1) 24%,
+                                oklch(70.0% 0.19 200.0 / 1) 36%,
+                                oklch(67.0% 0.18 235.0 / 1) 48%,
+                                oklch(73.0% 0.22 290.0 / 1) 60%,
+                                oklch(69.0% 0.21 330.0 / 1) 74%,
+                                oklch(74.0% 0.20 355.0 / 1) 88%,
+                                oklch(66.0% 0.18 25.0 / 1) 100%
+                              )`
+                            : isHovered === currentTheme.id
+                              ? currentTheme.cardColor
+                              : currentTheme.backgroundColor,
+                        borderColor: currentTheme.borderColor,
+                      }),
                 }}
                 onMouseEnter={() => {
                   if (isAdding) return;
@@ -193,14 +210,6 @@ const Themes = () => {
                   }, 150);
                   setIsHovered('');
                 }}
-                className={clsx(
-                  currentTheme.id === 'long' && 'col-span-full',
-                  'flex items-center justify-center rounded-xl py-4 duration-275 hover:cursor-pointer',
-                  'flex-1 overflow-hidden',
-                  // 'border-b-4',
-                  currentTheme.id === selectedTheme &&
-                    'border-0 border-(--main-color)',
-                )}
                 onClick={() => {
                   playClick();
                   if (currentTheme.id === 'long') playLong();

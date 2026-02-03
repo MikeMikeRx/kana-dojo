@@ -11,7 +11,10 @@ import {
   AchievementNotificationContainer,
   AchievementIntegration,
 } from '@/features/Achievements/components';
-import { applyTheme } from '@/features/Preferences/data/themes';
+import {
+  applyTheme,
+  isPremiumThemeId,
+} from '@/features/Preferences/data/themes';
 import BackToTop from '@/shared/components/navigation/BackToTop';
 import MobileBottomBar from '@/shared/components/layout/BottomBar';
 import { useVisitTracker } from '@/features/Progress/hooks/useVisitTracker';
@@ -137,7 +140,7 @@ export default function ClientLayout({
       style={{
         height: '100dvh',
         overflowY: 'auto',
-        ...(effectiveTheme === 'neon-city-glass'
+        ...(isPremiumThemeId(effectiveTheme)
           ? {
               backgroundImage: "url('/wallpapers/neonretrocarcity.jpg')",
               backgroundSize: 'cover',
