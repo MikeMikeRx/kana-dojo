@@ -154,7 +154,7 @@ const Themes = () => {
               <span>
                 <span className='text-(--main-color)'>Premium</span>
                 <span className='ml-1 text-(--secondary-color)'>
-                  (experimental, unstable)
+                  (experimental)
                 </span>
               </span>
             ) : (
