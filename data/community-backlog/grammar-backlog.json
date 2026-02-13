@@ -152,13 +152,13 @@
   {
     "id": 26,
     "text": "\"〜まま\" means \"as is\" or \"unchanged\".",
-    "completed": false,
+    "completed": true,
     "issued": false
   },
   {
     "id": 27,
     "text": "\"〜ばかり\" means \"just\" (in terms of time) or \"only\" depending on context.",
-    "issued": false,
+    "issued": true,
     "completed": false
   },
   {
