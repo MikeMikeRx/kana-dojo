@@ -1135,7 +1135,9 @@
     "mainColor": "oklch(75.0% 0.165 55.0 / 1)",
     "secondaryColor": "oklch(62.0% 0.185 20.0 / 1)",
     "issued": true,
-    "completed": false
+    "completed": true,
+    "completedBy": "NisargaK-21",
+    "completedPR": 5457
   },
   {
     "id": "sumi-charcoal",
