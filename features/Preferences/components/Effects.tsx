@@ -57,7 +57,7 @@ function EffectCard({
         'flex flex-col items-center justify-center gap-1',
         buttonBorderStyles,
         'border-1 border-(--card-color)',
-        'cursor-pointer px-3 py-4',
+        'cursor-pointer px-2 py-2.5',
       )}
       style={{
         outline: isSelected ? '3px solid var(--secondary-color)' : 'none',
@@ -72,11 +72,11 @@ function EffectCard({
         checked={isSelected}
       />
       {emoji ? (
-        <span className='text-3xl leading-none'>{emoji}</span>
+        <span className='text-2xl leading-none'>{emoji}</span>
       ) : (
-        <span className='text-lg leading-none text-(--secondary-color)'>—</span>
+        <span className='text-base leading-none text-(--secondary-color)'>—</span>
       )}
-      <span className='text-center text-sm leading-tight'>{name}</span>
+      <span className='text-center text-xs leading-tight'>{name}</span>
     </label>
   );
 }
@@ -106,7 +106,7 @@ const Effects = () => {
         defaultOpen={true}
         storageKey='prefs-effects-cursor'
       >
-        <fieldset className='grid grid-cols-2 gap-4 p-1 md:grid-cols-3 lg:grid-cols-4'>
+        <fieldset className='grid grid-cols-3 gap-2 p-1 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6'>
           {CURSOR_TRAIL_EFFECTS.map(effect => (
             <EffectCard
               key={effect.id}
@@ -128,7 +128,7 @@ const Effects = () => {
         defaultOpen={true}
         storageKey='prefs-effects-click'
       >
-        <fieldset className='grid grid-cols-2 gap-4 p-1 md:grid-cols-3 lg:grid-cols-4'>
+        <fieldset className='grid grid-cols-3 gap-2 p-1 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6'>
           {ORDERED_CLICK_EFFECTS.map(effect => (
             <EffectCard
               key={effect.id}
