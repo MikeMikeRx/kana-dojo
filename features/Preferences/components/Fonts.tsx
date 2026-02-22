@@ -59,8 +59,19 @@ const Fonts = () => {
           }}
         >
           {fontObj.name}
+          {fontObj.name === 'Zen Maru Gothic' && (
+            <span
+              style={{
+                color:
+                  fontObj.name === currentFont
+                    ? 'var(--background-color)'
+                    : 'var(--main-color)',
+              }}
+            >
+              {' (default)'}
+            </span>
+          )}
         </span>
-        {fontObj.name === 'Zen Maru Gothic' && ' (default)'}
         <span
           className='ml-2'
           style={{

@@ -46,11 +46,21 @@ const FontCard = memo(function FontCard({
       <p className={clsx('text-center text-xl', fontClassName)}>
         <span
           style={{
-            color: isSelected ? 'var(--main-color)' : 'var(--secondary-color)',
+            color: isSelected ? 'var(--background-color)' : 'var(--main-color)',
           }}
         >
           {fontName}
-          {isDefault && ' (default)'}
+          {isDefault && (
+            <span
+              style={{
+                color: isSelected
+                  ? 'var(--background-color)'
+                  : 'var(--main-color)',
+              }}
+            >
+              {' (default)'}
+            </span>
+          )}
         </span>
         <span
           className='ml-2'
