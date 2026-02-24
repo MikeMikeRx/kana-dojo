@@ -205,7 +205,9 @@ const NavLink = memo(
                 : 'text-(--secondary-color) hover:bg-(--card-color)',
             )}
           >
-            {renderIcon()}
+            <span className={clsx(!isActive && isMain && 'lg:text-(--main-color)')}>
+              {renderIcon()}
+            </span>
             <span className={isMain ? 'max-lg:hidden' : undefined}>
               {item.label}
             </span>
