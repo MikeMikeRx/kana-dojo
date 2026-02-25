@@ -173,7 +173,7 @@ jobs:
                 return;
               }
 
-              if (title.includes('Add New Grammar Point #')) {
+              if (title.includes('Add New Grammar Point #') || title.includes('Add Grammar Point #')) {
                 const grammarIdMatch = title.match(/#(\d+)/);
                 if (grammarIdMatch) {
                   const grammarId = parseInt(grammarIdMatch[1]);

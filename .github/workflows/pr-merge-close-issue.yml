@@ -327,6 +327,7 @@ jobs:
                       return th.name.toLowerCase() === themeName.toLowerCase();
                     });
                     if (themeIndex !== -1) {
+                      themes[themeIndex].issued = false;
                       themes[themeIndex].completed = true;
                       themes[themeIndex].completedBy = prAuthor;
                       themes[themeIndex].completedPR = prNumber;
@@ -344,6 +345,7 @@ jobs:
                   if (factId !== null) {
                     const factIndex = facts.findIndex(function(f) { return f.id === factId; });
                     if (factIndex !== -1) {
+                      facts[factIndex].issued = false;
                       facts[factIndex].completed = true;
                       facts[factIndex].completedBy = prAuthor;
                       facts[factIndex].completedPR = prNumber;
@@ -361,6 +363,7 @@ jobs:
                   if (proverbId !== null) {
                     const proverbIndex = proverbs.findIndex(function(p) { return p.id === proverbId; });
                     if (proverbIndex !== -1) {
+                      proverbs[proverbIndex].issued = false;
                       proverbs[proverbIndex].completed = true;
                       proverbs[proverbIndex].completedBy = prAuthor;
                       proverbs[proverbIndex].completedPR = prNumber;
@@ -378,6 +381,7 @@ jobs:
                   if (haikuId !== null) {
                     const haikuIndex = haikuItems.findIndex(function(h) { return h.id === haikuId; });
                     if (haikuIndex !== -1) {
+                      haikuItems[haikuIndex].issued = false;
                       haikuItems[haikuIndex].completed = true;
                       haikuItems[haikuIndex].completedBy = prAuthor;
                       haikuItems[haikuIndex].completedPR = prNumber;
@@ -395,6 +399,7 @@ jobs:
                   if (triviaId !== null) {
                     const triviaIndex = trivia.findIndex(function(q) { return q.id === triviaId; });
                     if (triviaIndex !== -1) {
+                      trivia[triviaIndex].issued = false;
                       trivia[triviaIndex].completed = true;
                       trivia[triviaIndex].completedBy = prAuthor;
                       trivia[triviaIndex].completedPR = prNumber;
@@ -412,6 +417,7 @@ jobs:
                   if (grammarId !== null) {
                     const grammarIndex = grammar.findIndex(function(g) { return g.id === grammarId; });
                     if (grammarIndex !== -1) {
+                      grammar[grammarIndex].issued = false;
                       grammar[grammarIndex].completed = true;
                       grammar[grammarIndex].completedBy = prAuthor;
                       grammar[grammarIndex].completedPR = prNumber;
@@ -429,6 +435,7 @@ jobs:
                   if (quoteId !== null) {
                     const quoteIndex = animeQuotes.findIndex(function(q) { return q.id === quoteId; });
                     if (quoteIndex !== -1) {
+                      animeQuotes[quoteIndex].issued = false;
                       animeQuotes[quoteIndex].completed = true;
                       animeQuotes[quoteIndex].completedBy = prAuthor;
                       animeQuotes[quoteIndex].completedPR = prNumber;
@@ -446,6 +453,7 @@ jobs:
                   if (idiomId !== null) {
                     const idiomIndex = idioms.findIndex(function(i) { return i.id === idiomId; });
                     if (idiomIndex !== -1) {
+                      idioms[idiomIndex].issued = false;
                       idioms[idiomIndex].completed = true;
                       idioms[idiomIndex].completedBy = prAuthor;
                       idioms[idiomIndex].completedPR = prNumber;
@@ -463,6 +471,7 @@ jobs:
                   if (dialectId !== null) {
                     const dialectIndex = regionalDialects.findIndex(function(d) { return d.id === dialectId; });
                     if (dialectIndex !== -1) {
+                      regionalDialects[dialectIndex].issued = false;
                       regionalDialects[dialectIndex].completed = true;
                       regionalDialects[dialectIndex].completedBy = prAuthor;
                       regionalDialects[dialectIndex].completedPR = prNumber;
@@ -480,6 +489,7 @@ jobs:
                   if (id !== null) {
                     const idx = items.findIndex(function(i) { return i.id === id; });
                     if (idx !== -1) {
+                      items[idx].issued = false;
                       items[idx].completed = true;
                       items[idx].completedBy = prAuthor;
                       items[idx].completedPR = prNumber;
@@ -497,6 +507,7 @@ jobs:
                   if (id !== null) {
                     const idx = items.findIndex(function(i) { return i.id === id; });
                     if (idx !== -1) {
+                      items[idx].issued = false;
                       items[idx].completed = true;
                       items[idx].completedBy = prAuthor;
                       items[idx].completedPR = prNumber;
@@ -514,6 +525,7 @@ jobs:
                   if (id !== null) {
                     const idx = items.findIndex(function(i) { return i.id === id; });
                     if (idx !== -1) {
+                      items[idx].issued = false;
                       items[idx].completed = true;
                       items[idx].completedBy = prAuthor;
                       items[idx].completedPR = prNumber;
@@ -531,6 +543,7 @@ jobs:
                   if (id !== null) {
                     const idx = items.findIndex(function(i) { return i.id === id; });
                     if (idx !== -1) {
+                      items[idx].issued = false;
                       items[idx].completed = true;
                       items[idx].completedBy = prAuthor;
                       items[idx].completedPR = prNumber;
@@ -548,6 +561,7 @@ jobs:
                   if (id !== null) {
                     const idx = items.findIndex(function(i) { return i.id === id; });
                     if (idx !== -1) {
+                      items[idx].issued = false;
                       items[idx].completed = true;
                       items[idx].completedBy = prAuthor;
                       items[idx].completedPR = prNumber;

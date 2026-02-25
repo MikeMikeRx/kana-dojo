@@ -82,8 +82,8 @@ jobs:
             let reenabled = 0;
 
             function reenableFromTitle(title) {
-              if (title.includes('Add New Color Theme:')) {
-                const themeMatch = title.match(/Add New Color Theme:\s*(.+?)\s*\(good[- ]first issue\)/i);
+              if (title.includes('Add New Color Theme:') || title.includes('Add Theme:')) {
+                const themeMatch = title.match(/Add (?:New Color )?Theme:\s*(.+?)\s*(?:—|\(good)/i);
                 if (themeMatch) {
                   const themeName = themeMatch[1].trim();
                   const themeIndex = themes.findIndex(function(t) { return t.name === themeName; });
@@ -127,7 +127,7 @@ jobs:
                 return;
               }
 
-              if (title.includes('Add Classic Japanese Haiku #')) {
+              if (title.includes('Add Classic Japanese Haiku #') || title.includes('Add Japanese Haiku #')) {
                 const haikuIdMatch = title.match(/#(\d+)/);
                 if (haikuIdMatch) {
                   const haikuId = parseInt(haikuIdMatch[1]);
@@ -142,7 +142,7 @@ jobs:
                 return;
               }
 
-              if (title.includes('Add New Trivia Question #')) {
+              if (title.includes('Add New Trivia Question #') || title.includes('Add Trivia Question #')) {
                 const triviaIdMatch = title.match(/#(\d+)/);
                 if (triviaIdMatch) {
                   const triviaId = parseInt(triviaIdMatch[1]);
@@ -157,7 +157,7 @@ jobs:
                 return;
               }
 
-              if (title.includes('Add New Grammar Point #')) {
+              if (title.includes('Add New Grammar Point #') || title.includes('Add Grammar Point #')) {
                 const grammarIdMatch = title.match(/#(\d+)/);
                 if (grammarIdMatch) {
                   const grammarId = parseInt(grammarIdMatch[1]);
@@ -172,7 +172,7 @@ jobs:
                 return;
               }
 
-              if (title.includes('Add New Japanese Idiom #')) {
+              if (title.includes('Add New Japanese Idiom #') || title.includes('Add Japanese Idiom #')) {
                 const idiomIdMatch = title.match(/#(\d+)/);
                 if (idiomIdMatch) {
                   const idiomId = parseInt(idiomIdMatch[1]);
@@ -187,7 +187,7 @@ jobs:
                 return;
               }
 
-              if (title.includes('Add Regional Dialect Entry #')) {
+              if (title.includes('Add Regional Dialect Entry #') || title.includes('Add Dialect Entry #')) {
                 const dialectIdMatch = title.match(/#(\d+)/);
                 if (dialectIdMatch) {
                   const dialectId = parseInt(dialectIdMatch[1]);
@@ -202,7 +202,7 @@ jobs:
                 return;
               }
 
-              if (title.includes('Add Japanese False Friend #')) {
+              if (title.includes('Add Japanese False Friend #') || title.includes('Add False Friend Pair #')) {
                 const idMatch = title.match(/#(\d+)/);
                 if (idMatch) {
                   const id = parseInt(idMatch[1]);
@@ -217,7 +217,7 @@ jobs:
                 return;
               }
 
-              if (title.includes('Add Japanese Cultural Etiquette Tip #')) {
+              if (title.includes('Add Japanese Cultural Etiquette Tip #') || title.includes('Add Etiquette Tip #')) {
                 const idMatch = title.match(/#(\d+)/);
                 if (idMatch) {
                   const id = parseInt(idMatch[1]);
@@ -232,7 +232,7 @@ jobs:
                 return;
               }
 
-              if (title.includes('Add Japanese Example Sentence #')) {
+              if (title.includes('Add Japanese Example Sentence #') || title.includes('Add Example Sentence #')) {
                 const idMatch = title.match(/#(\d+)/);
                 if (idMatch) {
                   const id = parseInt(idMatch[1]);
@@ -247,7 +247,7 @@ jobs:
                 return;
               }
 
-              if (title.includes('Add Common Japanese Learner Mistake #')) {
+              if (title.includes('Add Common Japanese Learner Mistake #') || title.includes('Add Learner Mistake #')) {
                 const idMatch = title.match(/#(\d+)/);
                 if (idMatch) {
                   const id = parseInt(idMatch[1]);
@@ -262,7 +262,7 @@ jobs:
                 return;
               }
 
-              if (title.includes('Add Famous Japanese Video Game Quote #')) {
+              if (title.includes('Add Famous Japanese Video Game Quote #') || title.includes('Add Video Game Quote #')) {
                 const idMatch = title.match(/#(\d+)/);
                 if (idMatch) {
                   const id = parseInt(idMatch[1]);
@@ -277,7 +277,7 @@ jobs:
                 return;
               }
 
-              if (title.includes('Add Famous Anime Quote #')) {
+              if (title.includes('Add Famous Anime Quote #') || title.includes('Add Anime Quote #')) {
                 const quoteIdMatch = title.match(/#(\d+)/);
                 if (quoteIdMatch) {
                   const quoteId = parseInt(quoteIdMatch[1]);
@@ -289,6 +289,7 @@ jobs:
                     console.log(`Re-enabled anime quote #${quoteId}`);
                   }
                 }
+                return;
               }
             }
 
