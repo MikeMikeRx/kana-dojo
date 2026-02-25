@@ -633,12 +633,12 @@
     "id": 106,
     "text": "\"〜ば\" forms a conditional meaning \"if\" in a general sense. (practice variation 21)",
     "issued": false,
-    "completed": false
+    "completed": true
   },
   {
     "id": 107,
     "text": "\"〜ても\" means \"even if\" or \"even though\". (practice variation 22)",
-    "issued": false,
+    "issued": true,
     "completed": false
   },
   {
