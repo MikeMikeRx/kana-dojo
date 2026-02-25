@@ -41,7 +41,7 @@
     "dont": "黙って席を立つ",
     "note": "店でも家庭でも使える。",
     "id": 5,
-    "issued": false,
+    "issued": true,
     "completed": false
   },
   {
