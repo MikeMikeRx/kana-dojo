@@ -54,26 +54,6 @@ jobs:
               return emojiBank[Math.floor(Math.random() * emojiBank.length)];
             }
 
-            function pickTwoAdjectives(adjectives) {
-              const fallback = ['helpful', 'friendly', 'quick', 'clear', 'creative'];
-              const pool = Array.isArray(adjectives) && adjectives.length > 0 ? adjectives : fallback;
-              const first = pool[Math.floor(Math.random() * pool.length)];
-              let second = pool[Math.floor(Math.random() * pool.length)];
-
-              if (pool.length > 1) {
-                while (second === first) {
-                  second = pool[Math.floor(Math.random() * pool.length)];
-                }
-              }
-
-              return [first, second];
-            }
-
-            function addTitleAdjectives(title, adjectives) {
-              const [first, second] = pickTwoAdjectives(adjectives);
-              return String(title).replace(' Add ', ` Add ${first}, ${second} `);
-            }
-
             function findRandomEligible(items, predicate) {
               if (!Array.isArray(items) || items.length === 0) {
                 return null;

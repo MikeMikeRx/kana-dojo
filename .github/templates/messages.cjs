@@ -3,8 +3,6 @@
  * Edit these messages without touching the workflow logic
  */
 
-// const issueTitleAdjectives = require('./issue-title-adjectives.cjs');
-
 module.exports = {
   // =============================================================================
   // SHARED LABELS (used across multiple workflows)
@@ -306,7 +304,6 @@ module.exports = {
 
     theme: {
       title: 'Theme: {name}',
-      adjectives: issueTitleAdjectives.theme,
       header: '## 🎨 Add New Color Theme: "{name}"',
       category: 'Community Contribution - Theme',
       estimatedTime: '<1 min',
@@ -323,7 +320,6 @@ module.exports = {
     },
     fact: {
       title: 'Japan Fact {id}',
-      adjectives: issueTitleAdjectives.fact,
       header: '## 🎋 Add New Japan Fact',
       category: 'Community Contribution - Fun Fact',
       estimatedTime: '<1 min',
@@ -337,7 +333,6 @@ module.exports = {
     },
     proverb: {
       title: 'Japanese Proverb {id}',
-      adjectives: issueTitleAdjectives.proverb,
       header: '## 🎌 Add Japanese Proverb (ことわざ)',
       category: 'Community Contribution - Proverb',
       estimatedTime: '<1 min',
@@ -350,7 +345,6 @@ module.exports = {
     },
     haiku: {
       title: 'Japanese Haiku {id}',
-      adjectives: issueTitleAdjectives.haiku,
       header: '## Add Classic Japanese Haiku',
       category: 'Community Contribution - Haiku',
       estimatedTime: '<1 min',
@@ -363,7 +357,6 @@ module.exports = {
     },
     trivia: {
       title: 'Trivia Question {id}',
-      adjectives: issueTitleAdjectives.trivia,
       header: '## 🧠 Add New Trivia Question',
       category: 'Community Contribution - Trivia',
       estimatedTime: '<1 min',
@@ -376,7 +369,6 @@ module.exports = {
     },
     grammar: {
       title: 'Grammar Point {id}',
-      adjectives: issueTitleAdjectives.grammar,
       header: '## 📖 Add New Grammar Point',
       category: 'Community Contribution - Grammar',
       estimatedTime: '<1 min',
@@ -389,7 +381,6 @@ module.exports = {
     },
     idiom: {
       title: 'Japanese Idiom {id}',
-      adjectives: issueTitleAdjectives.idiom,
       header: '## Add New Japanese Idiom',
       category: 'Community Contribution - Idiom',
       estimatedTime: '<1 min',
@@ -402,7 +393,6 @@ module.exports = {
     },
     regionalDialect: {
       title: 'Dialect Entry {id}',
-      adjectives: issueTitleAdjectives.regionalDialect,
       header: '## Add New Regional Dialect Entry',
       category: 'Community Contribution - Regional Dialect',
       estimatedTime: '<1 min',
@@ -415,7 +405,6 @@ module.exports = {
     },
     falseFriend: {
       title: 'False Friend Pair {id}',
-      adjectives: issueTitleAdjectives.falseFriend,
       header: '## Add Japanese False Friend',
       category: 'Community Contribution - False Friend',
       estimatedTime: '<1 min',
@@ -428,7 +417,6 @@ module.exports = {
     },
     culturalEtiquette: {
       title: 'Etiquette Tip {id}',
-      adjectives: issueTitleAdjectives.culturalEtiquette,
       header: '## Add Japanese Cultural Etiquette Tip',
       category: 'Community Contribution - Cultural Etiquette',
       estimatedTime: '<1 min',
@@ -441,7 +429,6 @@ module.exports = {
     },
     exampleSentence: {
       title: 'Example Sentence {id}',
-      adjectives: issueTitleAdjectives.exampleSentence,
       header: '## Add Japanese Example Sentence',
       category: 'Community Contribution - Example Sentence',
       estimatedTime: '<1 min',
@@ -454,7 +441,6 @@ module.exports = {
     },
     commonMistake: {
       title: 'Learner Mistake {id}',
-      adjectives: issueTitleAdjectives.commonMistake,
       header: '## Add Common Japanese Learner Mistake',
       category: 'Community Contribution - Common Mistake',
       estimatedTime: '<1 min',
@@ -467,7 +453,6 @@ module.exports = {
     },
     videoGameQuote: {
       title: 'Video Game Quote {id}',
-      adjectives: issueTitleAdjectives.videoGameQuote,
       header: '## Add Famous Japanese Video Game Quote',
       category: 'Community Contribution - Video Game Quote',
       estimatedTime: '<1 min',
@@ -480,7 +465,6 @@ module.exports = {
     },
     animeQuote: {
       title: 'Anime Quote {id}',
-      adjectives: issueTitleAdjectives.animeQuote,
       header: '## 🎬 Add Famous Anime Quote',
       category: 'Community Contribution - Anime Quote',
       estimatedTime: '<1 min',
